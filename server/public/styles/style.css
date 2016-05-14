@@ -1,0 +1,16 @@
+h1 {
+  color: purple;
+}
+
+.cat {
+  float: left;
+  margin: 10px;
+  height: 50px;
+  width: 140px;
+  padding: 4px;
+}
+
+.cat h3 {
+  font-size: 14px;
+  margin: 4px auto;
+}

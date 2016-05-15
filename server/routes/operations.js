@@ -13,14 +13,12 @@ var ops = {
 
 router.post('/*', function (req, res) {
 
-  var operation = req.params[0].substr(10);
-  console.log(operation);
+  var operation = req.params[0];
   // process calculation request
-  var x = parseFloat(req.body.op1);
-  var y = parseFloat(req.body.op2);
-  //var result = ops[operation](x, y);
-  //res.send({ result: result });
-  res.send(operation);
+  var x = parseFloat(req.body.num1);
+  var y = parseFloat(req.body.num2);
+  var result = ops[operation](x, y);
+  res.send({ result: result });
 
 });
 

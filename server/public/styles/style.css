@@ -1,9 +1,10 @@
 h1 {
   color: purple;
-  font-size: 28px;
+  font-size: 25px;
 }
 
 h2 {
+  padding-right: 4px;
   border: 2px solid black;
   text-align: right;
 }
@@ -11,7 +12,7 @@ h2 {
 .btn {
   font-size: 20px;
   width: 42px;
-  margin: 3px;
+  margin: 2px;
 }
 
 .highlight, .highlight:hover, .highlight:active {

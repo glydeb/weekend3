@@ -12,7 +12,7 @@ $(document).ready(function () {
   $('#equals').on('click', postCalc);
 
   // clear button
-  $('#clear').on('click', clearCalc('0'));
+  $('#clear').on('click', 0, clearCalc);
 
   //number buttons
   $('.num').on('click', addNum);
@@ -39,7 +39,11 @@ function selectOp() {
 function postCalc() {
   // store screen contents in num2
   values.num2 = clearScreen();
-  if (operation !== '') {
+  if (operation === '' || (operation === "division" &&
+    values.num2 === '0')) {
+    alert('Not a valid calculation - input cleared.');
+    clearCalc('0');
+  } else {
     $.ajax({
       type: 'POST',
       url: '/operations/' + operation,
@@ -48,14 +52,17 @@ function postCalc() {
         clearCalc('=' + response.result);
       }
     });
-  } else {
-    alert('Not a valid calculation - input cleared.');
-    clearCalc('0');
   }
 }
 
 function clearCalc(result) {
-  $('#screen').text(result);
+  console.log(result.data);
+  if (result.data === 0) {
+    $('#screen').text('0');
+  } else {
+    $('#screen').text(result);
+  }
+
   values.num1 = '';
   values.num2 = '';
   operation = '';
@@ -66,10 +73,9 @@ function addNum() {
   // local variable to handle text to display
   var screenText = '';
 
-  // Append number to screen, removing leading zero and
+  // Append number to screen, removing default zero and
   // handle case where screen shows result
-  var firstChar = firstScreenChar();
-  if (firstChar === '0' || firstChar === '=') {
+  if ($('#screen').text() === '0' || firstScreenChar() === '=') {
     screenText = $(this).attr('id');
   } else {
     screenText = $('#screen').text() + $(this).attr('id');

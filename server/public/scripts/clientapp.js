@@ -37,9 +37,12 @@ function selectOp() {
 }
 
 function postCalc() {
+  // hide screen contents
+  $('#screen').css('color', 'white');
+
   // store screen contents in num2
   values.num2 = clearScreen();
-  if (operation === '' || (operation === "division" &&
+  if (operation === '' || (operation === 'division' &&
     values.num2 === '0')) {
     alert('Not a valid calculation - input cleared.');
     clearCalc('0');
@@ -50,6 +53,10 @@ function postCalc() {
       data: values,
       success: function (response) {
         clearCalc('=' + response.result);
+
+        // reveal screen contents
+        $('#screen').css('color', 'black');
+
       }
     });
   }

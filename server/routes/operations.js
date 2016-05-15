@@ -11,14 +11,16 @@ var ops = {
   division: function (x, y) { return x / y; }
 };
 
-router.post('/', function (req, res) {
+router.post('/*', function (req, res) {
 
+  var operation = req.params[0].substr(10);
+  console.log(operation);
   // process calculation request
   var x = parseFloat(req.body.op1);
   var y = parseFloat(req.body.op2);
-  var result = ops[req.body.operation](x, y);
-  console.log({ result: result });
-  res.send({ result: result });
+  //var result = ops[operation](x, y);
+  //res.send({ result: result });
+  res.send(operation);
 
 });
 
